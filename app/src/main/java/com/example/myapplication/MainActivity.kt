@@ -1,11 +1,14 @@
 package com.example.myapplication
-
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import com.adobe.marketing.mobile.*
+import com.adobe.marketing.mobile.Target
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import java.lang.Exception
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +21,20 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, getString(R.string.action_message), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+        try {
+            MobileCore.setApplication(application);
+            MobileCore.setLogLevel(LoggingMode.DEBUG);
+            Target.registerExtension()
+            Griffon.registerExtension()
+            MobileServices.registerExtension()
+            Analytics.registerExtension()
+            Identity.registerExtension()
+            Lifecycle.registerExtension()
+            Signal.registerExtension()
+            UserProfile.registerExtension()
+            MobileCore.start { MobileCore.configureWithAppID("2491ed4c983b/ae44614d1ed3/launch-fbf447265b73-development") }
+        } catch (e: Exception){}
+         System.out.println("Oops!");
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
